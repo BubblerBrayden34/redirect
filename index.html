@@ -27,7 +27,7 @@
   </style>
 </head>
 <body>
-  <button onclick="route()">route</button>
+  <button id="router-btn">route</button>
 
   <script>
     function generateDomain() {
@@ -41,14 +41,14 @@
 
     function route() {
       const fakeDomain = generateDomain();
-      const dataUrl = 'data:text/html;base64,PHRpdGxlPlRlc3QgUGFnZTwvdGl0bGU+PGgyPkhlbGxvLCBmYWtlIHJvdXRlZCB3b3JsZCE8L2gyPg=='; // Replace with your real data:URL
+      const dataUrl = 'data:text/html;base64,PHRpdGxlPkhlbGxvPC90aXRsZT48aDI+VGhpcyBpcyBhIGZha2UgcGFnZTwvaDI+'; // Example working one
 
-      // Change the address bar to fake domain (no redirect)
-      history.pushState({}, '', 'https://' + fakeDomain + '/');
-
-      // Open data URL in a new tab
-      window.open(dataUrl, '_blank');
+      history.replaceState(null, '', 'https://' + fakeDomain + '/');
+      window.location.href = dataUrl;
     }
+
+    // Attach AFTER definition to avoid "not defined" error
+    document.getElementById('router-btn').addEventListener('click', route);
   </script>
 </body>
 </html>
